@@ -1,5 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
 body {
   background-color: black;
   padding: 30px;
+}
+.tox-promotion {
+  display: none !important;
+}
+.tox-statusbar__branding {
+  display: none !important;
 }

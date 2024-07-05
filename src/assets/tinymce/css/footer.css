@@ -1,0 +1,50 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.footer {
+  background-color: #f2f2f2;
+  text-align: center;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between; /* ensures equal spacing */
+  width: 100%; /* occupies full width of the footer */
+}
+
+.address,
+.links,
+.policies,
+.contact {
+  flex: 1; /* each section takes equal width */
+  padding: 10px; /* optional for spacing inside each section */
+  display: flex;
+  flex-direction: column;
+  justify-content: start; /* centers content vertically in each section */
+  font-size: 14px; /* standard font size for address and contact */
+  text-align: start;
+}
+
+.links,
+.policies {
+  font-size: 16px; /* slightly larger font size for link sections */
+}
+
+.links a,
+.policies a {
+  margin-right: 10px; /* space to the right of links */
+  margin-bottom: 10px; /* adds space between links */
+  color: #000;
+  text-decoration: none;
+}
+
+.address p,
+.contact p {
+  margin: 0; /* removes default paragraph margin */
+}
