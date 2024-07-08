@@ -1,0 +1,43 @@
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 16px;
+}
+
+#header1 {
+  min-height: 650px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: url("https://template1.lincsell.com/wp-content/uploads/2020/10/h-slider-01.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+#header1 h1 {
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  color: white;
+  font-size: 147px;
+  font-family: "EB Garamond";
+}
+#header1 p {
+  text-align: center;
+  width: 60%;
+  font-weight: 600;
+  color: white;
+  font-size: 22px;
+  font-family: "EB Garamond";
+}
+#header1 button {
+  font-family: "Catamaran", Sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  font-style: normal;
+  letter-spacing: 1.2px;
+  color: #ffffff;
+  border: none;
+  padding: 13px 28px 12px 28px;
+  background-color: rgba(255, 255, 255, 0.519);
+}

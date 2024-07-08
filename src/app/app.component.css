@@ -1,3 +1,87 @@
+.EditButton {
+  position: absolute;
+  right: 30px;
+  top: 30px;
+  background-color: white;
+  color: black;
+  font-size: 20px;
+  padding-right: 25px;
+  padding-left: 25px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border: none;
+}
+
+.EditButton:hover {
+  background-color: black;
+  color: white;
+}
+
+.SaveButton {
+  position: absolute;
+  right: 30px;
+  top: 80px;
+  background-color: white;
+  color: black;
+  font-size: 20px;
+  padding-right: 25px;
+  padding-left: 25px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border: none;
+}
+
+.SaveButton:hover {
+  background-color: black;
+  color: white;
+}
+
 .tox-statusbar {
   display: none !important;
+}
+
+#header1 {
+  min-height: 650px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: url("https://template1.lincsell.com/wp-content/uploads/2020/10/h-slider-01.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#header1 h1 {
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  color: white;
+  font-size: 147px;
+  font-family: "EB Garamond";
+}
+
+#header1 p {
+  text-align: center;
+  width: 60%;
+  font-weight: 600;
+  color: white;
+  font-size: 22px;
+  font-family: "EB Garamond";
+}
+
+#header1 button {
+  font-family: "Catamaran", Sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  font-style: normal;
+  letter-spacing: 1.2px;
+  color: #ffffff;
+  border: none;
+  /* padding: 13px 28px 12px 28px; */
+  background-color: rgba(255, 255, 255, 0.519);
+}
+
+.col-red {
+  color: white !important;
 }

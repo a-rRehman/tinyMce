@@ -1,0 +1,8 @@
+<div *ngIf="!isEditing">
+  <button class="EditButton" (click)="toggleEditor()">Edit</button>
+  <div #dynamicContentContainer></div>
+</div>
+<div *ngIf="isEditing">
+  <editor [init]="init"></editor>
+  <button class="SaveButton" (click)="saveContent()">Save</button>
+</div>
