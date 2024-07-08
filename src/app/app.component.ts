@@ -81,65 +81,7 @@ export class AppComponent implements AfterViewInit {
       </a>
     </header>
   `;
-  initialValue = `
-  <header id="header1">
-    <h1 style="color:white;">A Slice of Heaven</h1>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation.
-    </p>
-    <a href="www.google.com">
-      <button>More About Sweets</button>
-    </a>
-  </header>
-  <style>
 
- body {
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: 16px;
-}
-#header1 {
-  min-height: 650px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-image: url("https://template1.lincsell.com/wp-content/uploads/2020/10/h-slider-01.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-#header1 h1 {
-  text-align: center;
-  padding: 0;
-  margin: 0;
-  color: white;
-  font-size: 147px;
-  font-family: "EB Garamond";
-}
-#header1 p {
-  text-align: center;
-  width: 60%;
-  font-weight: 600;
-  color: white;
-  font-size: 22px;
-  font-family: "EB Garamond";
-}
-#header1 button {
-  font-family: "Catamaran", Sans-serif;
-  font-size: 12px;
-  font-weight: 500;
-  text-transform: uppercase;
-  font-style: normal;
-  letter-spacing: 1.2px;
-  color: #ffffff;
-  border: none;
-  padding: 13px 28px 12px 28px;
-  background-color: rgba(255, 255, 255, 0.519);
-}
-
-  </style>
-`;
   cssContent = `
 <style>
 
@@ -184,24 +126,11 @@ export class AppComponent implements AfterViewInit {
   border: none;
   padding: 13px 28px 12px 28px;
   background-color: rgba(255, 255, 255, 0.519);
-}
-</style>
-`;
+  }
+  </style>
+  `;
+
   constructor(private renderer: Renderer2) {}
-
-  ngAfterViewInit(): void {
-    this.onChange();
-  }
-
-  onChange() {
-    this.loadDynamicContent();
-  }
-
-  loadDynamicContent() {
-    const div = this.renderer.createElement('div');
-    this.renderer.setProperty(div, 'innerHTML', this.content);
-    this.renderer.appendChild(this.container?.nativeElement, div);
-  }
 
   isEditing = false;
 
@@ -278,10 +207,24 @@ export class AppComponent implements AfterViewInit {
     },
     setup: (editor) => {
       editor.on('init', () => {
-        editor.setContent(this.initialValue);
+        editor.setContent(this.content);
       });
     },
   };
+
+  ngAfterViewInit(): void {
+    this.onChange();
+  }
+
+  onChange() {
+    this.loadDynamicContent();
+  }
+
+  loadDynamicContent() {
+    const div = this.renderer.createElement('div');
+    this.renderer.setProperty(div, 'innerHTML', this.content);
+    this.renderer.appendChild(this.container?.nativeElement, div);
+  }
 
   toggleEditor() {
     this.isEditing = !this.isEditing;
@@ -289,8 +232,7 @@ export class AppComponent implements AfterViewInit {
 
   saveContent() {
     const htmlContent = tinymce.activeEditor.getContent();
-    this.initialValue = `${this.cssContent}${htmlContent}`;
-    this.content = this.initialValue;
+    this.content = `${this.cssContent}${htmlContent}`;
     console.log(this.content);
     this.toggleEditor();
     setTimeout(() => {
