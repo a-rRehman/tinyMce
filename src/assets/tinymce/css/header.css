@@ -1,3 +1,7 @@
+.mce-content-body [data-mce-selected="inline-boundary"] {
+  background-color: rgba(255, 255, 255, 0.007);
+}
+
 body {
   font-family: Helvetica, Arial, sans-serif;
   font-size: 16px;
@@ -13,6 +17,10 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
 }
+button {
+  cursor: pointer;
+}
+
 #header1 h1 {
   text-align: center;
   padding: 0;
@@ -31,7 +39,7 @@ body {
 }
 #header1 button {
   font-family: "Catamaran", Sans-serif;
-  font-size: 12px;
+  font-size: 18px;
   font-weight: 500;
   text-transform: uppercase;
   font-style: normal;
@@ -39,5 +47,5 @@ body {
   color: #ffffff;
   border: none;
   padding: 13px 28px 12px 28px;
-  background-color: rgba(255, 255, 255, 0.519);
+  background-color: black;
 }

@@ -33,6 +33,9 @@ export class AppComponent implements AfterViewInit {
 
   content = `
     <style>
+    button{
+    cursor:pointer;
+    }
      body {
   font-family: Helvetica, Arial, sans-serif;
   font-size: 16px;
@@ -65,7 +68,7 @@ export class AppComponent implements AfterViewInit {
 }
 #header1 button {
   font-family: "Catamaran", Sans-serif;
-  font-size: 12px;
+  font-size: 18px;
   font-weight: 500;
   text-transform: uppercase;
   font-style: normal;
@@ -73,7 +76,7 @@ export class AppComponent implements AfterViewInit {
   color: #ffffff;
   border: none;
   padding: 13px 28px 12px 28px;
-  background-color: rgba(255, 255, 255, 0.519);
+  background-color: black;
 }
 
     </style>
@@ -85,7 +88,7 @@ export class AppComponent implements AfterViewInit {
         veniam, quis nostrud exercitation.
       </p>
       <a href="https://www.google.com">
-        <button>More About Sweets</button>
+        <button id="customButton">More About Sweets</button>
       </a>
     </header>
   `;
@@ -227,7 +230,9 @@ export class AppComponent implements AfterViewInit {
 
   cssContent = `
 <style>
-
+ button{
+ cursor:pointer;
+ }
  body {
   font-family: Helvetica, Arial, sans-serif;
   font-size: 16px;
@@ -260,7 +265,7 @@ export class AppComponent implements AfterViewInit {
 }
 #header1 button {
   font-family: "Catamaran", Sans-serif;
-  font-size: 12px;
+  font-size: 18px;
   font-weight: 500;
   text-transform: uppercase;
   font-style: normal;
@@ -268,7 +273,7 @@ export class AppComponent implements AfterViewInit {
   color: #ffffff;
   border: none;
   padding: 13px 28px 12px 28px;
-  background-color: rgba(255, 255, 255, 0.519);
+  background-color: black;
   }
   </style>
   `;
@@ -366,6 +371,7 @@ export class AppComponent implements AfterViewInit {
     min_height: 760,
     context_toolbar: true,
     plugins: [
+      'customButtonPlugin',
       'autosave',
       'charmap',
       'code',
@@ -377,15 +383,17 @@ export class AppComponent implements AfterViewInit {
       'preview',
       'save',
       'wordcount',
-      'backgroundImageChanger', // Custom plugin
+      'backgroundImageChanger',
       'contextmenu',
     ],
     toolbar:
-      'fontselect | undo redo | styles | bold italic underline | alignleft aligncenter alignright alignjustify |' +
+      'customButton fontselect | undo redo | styles | bold italic underline | alignleft aligncenter alignright alignjustify |' +
       'bullist numlist outdent indent | link image | print preview media fullscreen |' +
-      'forecolor backcolor emoticons | code | backgroundImageChanger',
+      'forecolor backcolor emoticons | code | backgroundImageChanger ',
     contextmenu: 'link image table',
     external_plugins: {
+      customButtonPlugin:
+        '/assets/tinymce/plugins/mycustomplugin/custom-button-plugin.js',
       backgroundImageChanger:
         '/assets/tinymce/plugins/mycustomplugin/backgroundImageChanger.js',
     },
@@ -729,7 +737,6 @@ export class AppComponent implements AfterViewInit {
   saveContent() {
     const htmlContent = tinymce.activeEditor.getContent();
     this.content = `${this.cssContent}${htmlContent}`;
-    console.log(this.content);
     this.toggleEditor();
     setTimeout(() => {
       this.loadDynamicContent();
@@ -739,7 +746,6 @@ export class AppComponent implements AfterViewInit {
   saveContent1() {
     const htmlContent = tinymce.activeEditor.getContent();
     this.content1 = `${this.cssContent1}${htmlContent}`;
-    console.log(this.content1);
     this.toggleEditor1();
     setTimeout(() => {
       this.loadDynamicContent1();
@@ -749,7 +755,7 @@ export class AppComponent implements AfterViewInit {
   saveContent2() {
     const htmlContent = tinymce.activeEditor.getContent();
     this.content2 = `${this.cssContent2}${htmlContent}`;
-    console.log(this.content1);
+
     this.toggleEditor2();
     setTimeout(() => {
       this.loadDynamicContent2();
