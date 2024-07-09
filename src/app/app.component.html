@@ -2,7 +2,32 @@
   <button class="EditButton" (click)="toggleEditor()">Edit</button>
   <div #dynamicContentContainer></div>
 </div>
+
 <div *ngIf="isEditing">
   <editor [init]="init"></editor>
   <button class="SaveButton" (click)="saveContent()">Save</button>
 </div>
+
+<!--------------------------------------- -->
+
+<div *ngIf="!isEditing1">
+  <button class="EditButton1" (click)="toggleEditor1()">Edit</button>
+  <div #dynamicContentContainer1></div>
+</div>
+
+<div *ngIf="isEditing1">
+  <editor [init]="init1"></editor>
+  <button class="SaveButton1" (click)="saveContent1()">Save</button>
+</div>
+
+<!--------------------------------------- -->
+<!-- 
+<div *ngIf="!isEditing2">
+  <button class="EditButton2" (click)="toggleEditor2()">Edit</button>
+  <div #dynamicContentContainer2></div>
+</div>
+
+<div *ngIf="isEditing2">
+  <editor [init]="init2"></editor>
+  <button class="SaveButton2" (click)="saveContent2()">Save</button>
+</div> -->
