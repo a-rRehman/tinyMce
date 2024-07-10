@@ -50,8 +50,7 @@ tinymce.PluginManager.add("customButtonPlugin", function (editor) {
             : "",
         };
 
-        console.log("Current styles:", currentStyles); // Log the current styles for debugging
-
+        console.log("Current styles:", currentStyles);
         editor.windowManager.open({
           title: "Set Button Attributes",
           body: {

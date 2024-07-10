@@ -67,7 +67,8 @@ export class AppComponent implements AfterViewInit {
   font-size: 22px;
   font-family: "EB Garamond";
 }
-#header1 button {
+
+#customButton {
   font-family: "Catamaran", Sans-serif;
   font-size: 18px;
   font-weight: 500;
@@ -264,7 +265,7 @@ export class AppComponent implements AfterViewInit {
   font-size: 22px;
   font-family: "EB Garamond";
 }
-#header1 button {
+#customButton {
   font-family: "Catamaran", Sans-serif;
   font-size: 18px;
   font-weight: 500;
@@ -275,7 +276,8 @@ export class AppComponent implements AfterViewInit {
   border: none;
   padding: 13px 28px 12px 28px;
   background-color: black;
-  }
+}
+
   </style>
   `;
 
