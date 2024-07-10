@@ -46,7 +46,8 @@ export class AppComponent implements AfterViewInit {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-image: url("https://template1.lincsell.com/wp-content/uploads/2020/10/h-slider-01.jpg");
+  // background-image: url("https://template1.lincsell.com/wp-content/uploads/2020/10/h-slider-01.jpg");
+  background-image: url("/assets/header.jpg");
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -243,9 +244,9 @@ export class AppComponent implements AfterViewInit {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-image: url("https://template1.lincsell.com/wp-content/uploads/2020/10/h-slider-01.jpg");
-  background-size: cover;
+  background-image: url("/assets/header.jpg");
   background-repeat: no-repeat;
+   background-size: cover;
 }
 #header1 h1 {
   text-align: center;
@@ -358,6 +359,8 @@ export class AppComponent implements AfterViewInit {
 
   constructor(private renderer: Renderer2) {}
 
+  showEditButton = false;
+  showEditButton1 = false;
   isEditing = false;
   isEditing1 = false;
   isEditing2 = false;

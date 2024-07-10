@@ -13,10 +13,11 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-image: url("https://template1.lincsell.com/wp-content/uploads/2020/10/h-slider-01.jpg");
+  background-image: url("/assets/header.jpg");
   background-size: cover;
   background-repeat: no-repeat;
 }
+
 button {
   cursor: pointer;
 }

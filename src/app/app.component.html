@@ -1,5 +1,11 @@
-<div *ngIf="!isEditing">
-  <button class="EditButton" (click)="toggleEditor()">Edit</button>
+<div
+  *ngIf="!isEditing"
+  (mouseenter)="showEditButton = true"
+  (mouseleave)="showEditButton = false"
+>
+  <button class="EditButton" *ngIf="showEditButton" (click)="toggleEditor()">
+    Edit
+  </button>
   <div #dynamicContentContainer></div>
 </div>
 
@@ -10,8 +16,14 @@
 
 <!--------------------------------------- -->
 
-<div *ngIf="!isEditing1">
-  <button class="EditButton1" (click)="toggleEditor1()">Edit</button>
+<div
+  *ngIf="!isEditing1"
+  (mouseenter)="showEditButton1 = true"
+  (mouseleave)="showEditButton1 = false"
+>
+  <button class="EditButton1" *ngIf="showEditButton1" (click)="toggleEditor1()">
+    Edit
+  </button>
   <div #dynamicContentContainer1></div>
 </div>
 

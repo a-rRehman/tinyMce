@@ -12,9 +12,11 @@ tinymce.PluginManager.add("customButtonPlugin", function (editor) {
           borderRadius: node.style.borderRadius
             ? parseInt(node.style.borderRadius)
             : "",
+          borderWidth: node.style.borderWidth
+            ? parseInt(node.style.borderWidth)
+            : "",
+          borderStyle: node.style.borderStyle || "",
           fontSize: node.style.fontSize ? parseInt(node.style.fontSize) : "",
-          buttonWidth: node.style.width || "",
-          buttonAlignment: node.style.cssFloat || "",
         };
 
         editor.windowManager.open({
@@ -43,6 +45,30 @@ tinymce.PluginManager.add("customButtonPlugin", function (editor) {
               },
               {
                 type: "input",
+                name: "borderWidth",
+                label: "Border Width (px)",
+                inputMode: "numeric",
+                value: currentStyles.borderWidth,
+              },
+              {
+                type: "listbox",
+                name: "borderStyle",
+                label: "Border Style",
+                items: [
+                  { text: "None", value: "none" },
+                  { text: "Solid", value: "solid" },
+                  { text: "Dotted", value: "dotted" },
+                  { text: "Dashed", value: "dashed" },
+                  { text: "Double", value: "double" },
+                  { text: "Groove", value: "groove" },
+                  { text: "Ridge", value: "ridge" },
+                  { text: "Inset", value: "inset" },
+                  { text: "Outset", value: "outset" },
+                ],
+                value: currentStyles.borderStyle,
+              },
+              {
+                type: "input",
                 name: "fontSize",
                 label: "Font Size (px)",
                 inputMode: "numeric",
@@ -51,21 +77,9 @@ tinymce.PluginManager.add("customButtonPlugin", function (editor) {
               {
                 type: "input",
                 name: "buttonWidth",
-                label: "Button Width (px or %)",
-                inputMode: "text",
+                label: "Button Width (px)",
+                inputMode: "numeric",
                 value: currentStyles.buttonWidth,
-              },
-              {
-                type: "selectbox",
-                name: "buttonAlignment",
-                label: "Button Alignment",
-                items: [
-                  { text: "Default", value: "" },
-                  { text: "Left", value: "left" },
-                  { text: "Center", value: "center" },
-                  { text: "Right", value: "right" },
-                ],
-                value: currentStyles.buttonAlignment,
               },
             ],
           },
@@ -87,10 +101,12 @@ tinymce.PluginManager.add("customButtonPlugin", function (editor) {
             if (data.borderColor) node.style.borderColor = data.borderColor;
             if (data.borderRadius)
               node.style.borderRadius = data.borderRadius + "px";
+            if (data.borderWidth)
+              node.style.borderWidth = data.borderWidth + "px";
+            if (data.borderStyle) node.style.borderStyle = data.borderStyle;
             if (data.fontSize) node.style.fontSize = data.fontSize + "px";
-            if (data.buttonWidth) node.style.width = data.buttonWidth;
-            if (data.buttonAlignment)
-              node.style.cssFloat = data.buttonAlignment;
+            if (data.buttonWidth) node.style.width = data.buttonWidth + "px";
+
             api.close();
           },
         });
