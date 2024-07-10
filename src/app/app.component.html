@@ -28,18 +28,24 @@
 </div>
 
 <div *ngIf="isEditing1">
-  <editor [init]="init1"></editor>
   <button class="SaveButton1" (click)="saveContent1()">Save</button>
+  <editor [init]="init1"></editor>
 </div>
 
-<!--------------------------------------- -->
-<!-- 
-<div *ngIf="!isEditing2">
-  <button class="EditButton2" (click)="toggleEditor2()">Edit</button>
+<!-- ---------------------------------------- -->
+
+<div
+  *ngIf="!isEditing2"
+  (mouseenter)="showEditButton2 = true"
+  (mouseleave)="showEditButton2 = false"
+>
+  <button class="EditButton2" *ngIf="showEditButton2" (click)="toggleEditor2()">
+    Edit
+  </button>
   <div #dynamicContentContainer2></div>
 </div>
 
 <div *ngIf="isEditing2">
-  <editor [init]="init2"></editor>
   <button class="SaveButton2" (click)="saveContent2()">Save</button>
-</div> -->
+  <editor [init]="init2"></editor>
+</div>

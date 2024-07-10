@@ -1,0 +1,34 @@
+.greetButton {
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: #010000;
+  border-radius: 0px 0px 0px 0px;
+  padding: 12px 28px 12px 28px;
+}
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  margin: 0;
+  padding: 0;
+}
+.greetings-section {
+  background-image: url("https://template1.lincsell.com/wp-content/uploads/2020/10/h-img-05.jpg");
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 95%;
+  margin: 50px auto;
+  text-align: center;
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+.greetings-section h1 {
+  font-size: 70px;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+.greetings-section p {
+  font-size: 1.2em;
+  color: #ffffff;
+  line-height: 1.6;
+}

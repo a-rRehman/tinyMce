@@ -61,10 +61,10 @@
 }
 
 .SaveButton1 {
-  float: right;
-  margin-right: 10px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  position: absolute;
+  right: 30px;
+  bottom: 100px;
+  z-index: 99999;
   background-color: black;
   color: white;
   font-size: 20px;
@@ -76,6 +76,43 @@
 }
 
 .SaveButton1:hover {
+  background-color: black;
+  color: white;
+}
+
+.EditButton2 {
+  position: absolute;
+  right: 40px;
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  font-size: 20px;
+  padding-right: 25px;
+  padding-left: 25px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border: none;
+}
+
+.EditButton2:hover {
+  background-color: black;
+  color: white;
+}
+
+.SaveButton2 {
+  z-index: 99999;
+  position: absolute;
+  right: 40px;
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  font-size: 20px;
+  padding-right: 25px;
+  padding-left: 25px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border: none;
+}
+
+.SaveButton2:hover {
   background-color: black;
   color: white;
 }

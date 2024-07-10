@@ -181,14 +181,14 @@ export class AppComponent implements AfterViewInit {
   `;
 
   content2 = `
-   <div class="greetings-section" style="margin-top: 100px; margin-bottom: 100px">
+   <div class="greetings-section">
   <p>GET TO KNOW US</p>
   <h1>Greetings From Lincsell</h1>
   <a href="www.google.com"
     ><button class="greetButton">More About Us</button></a
   >
 </div>
-
+ 
 <style>
   .greetButton {
     font-size: 12px;
@@ -199,12 +199,7 @@ export class AppComponent implements AfterViewInit {
     border-radius: 0px 0px 0px 0px;
     padding: 12px 28px 12px 28px;
   }
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    margin: 0;
-    padding: 0;
-  }
+ 
   .greetings-section {
     background-image: url("https://template1.lincsell.com/wp-content/uploads/2020/10/h-img-05.jpg");
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -225,7 +220,7 @@ export class AppComponent implements AfterViewInit {
     line-height: 1.6;
   }
 </style>
-
+ 
   `;
 
   cssContent = `
@@ -317,9 +312,8 @@ export class AppComponent implements AfterViewInit {
   `;
 
   cssContent2 = `
- 
-<style>
-  .greetButton {
+  <style>
+   .greetButton {
     font-size: 12px;
     font-weight: 500;
     text-transform: uppercase;
@@ -328,12 +322,7 @@ export class AppComponent implements AfterViewInit {
     border-radius: 0px 0px 0px 0px;
     padding: 12px 28px 12px 28px;
   }
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    margin: 0;
-    padding: 0;
-  }
+ 
   .greetings-section {
     background-image: url("https://template1.lincsell.com/wp-content/uploads/2020/10/h-img-05.jpg");
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -353,14 +342,14 @@ export class AppComponent implements AfterViewInit {
     color: #ffffff;
     line-height: 1.6;
   }
-</style>
-
-  `;
+         </style>
+   `;
 
   constructor(private renderer: Renderer2) {}
 
   showEditButton = false;
   showEditButton1 = false;
+  showEditButton2 = false;
   isEditing = false;
   isEditing1 = false;
   isEditing2 = false;
@@ -696,6 +685,7 @@ export class AppComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.onChange();
     this.onChange1();
+    this.onChange2();
   }
 
   onChange() {
@@ -705,6 +695,7 @@ export class AppComponent implements AfterViewInit {
   onChange1() {
     this.loadDynamicContent1();
   }
+
   onChange2() {
     this.loadDynamicContent2();
   }
@@ -758,7 +749,6 @@ export class AppComponent implements AfterViewInit {
   saveContent2() {
     const htmlContent = tinymce.activeEditor.getContent();
     this.content2 = `${this.cssContent2}${htmlContent}`;
-
     this.toggleEditor2();
     setTimeout(() => {
       this.loadDynamicContent2();
