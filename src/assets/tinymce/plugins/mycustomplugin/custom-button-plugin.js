@@ -1,23 +1,56 @@
+function rgbToHex(rgb) {
+  if (!rgb || !rgb.startsWith("rgb")) return rgb; // Return the input if it's not an RGB value
+  let parts = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+  if (!parts) return rgb; // Return the input if it doesn't match RGB pattern
+  let r = parseInt(parts[1]);
+  let g = parseInt(parts[2]);
+  let b = parseInt(parts[3]);
+  return (
+    "#" +
+    ((1 << 24) + (r << 16) + (g << 8) + b)
+      .toString(16)
+      .slice(1)
+      .toUpperCase()
+      .padStart(6, "0")
+  );
+}
+
+function cleanColorInput(colorInput) {
+  if (colorInput.startsWith("some(") && colorInput.endsWith(")")) {
+    return colorInput.slice(5, -1);
+  }
+  return colorInput;
+}
+
 tinymce.PluginManager.add("customButtonPlugin", function (editor) {
   editor.ui.registry.addButton("editButton", {
     text: "Edit Button",
     icon: "edit",
     onAction: function () {
       const node = editor.selection.getNode();
+      console.log("Selected node:", node); // Log the selected node for debugging
       if (node.nodeName === "BUTTON" && node.id === "customButton") {
         // Get current styles and attributes of the button
         const currentStyles = {
-          backgroundColor: node.style.backgroundColor || "",
-          borderColor: node.style.borderColor || "",
+          backgroundColor:
+            cleanColorInput(rgbToHex(node.style.backgroundColor)) || "",
+          borderColor: cleanColorInput(rgbToHex(node.style.borderColor)) || "",
           borderRadius: node.style.borderRadius
-            ? parseInt(node.style.borderRadius)
+            ? node.style.borderRadius.replace("px", "")
             : "",
           borderWidth: node.style.borderWidth
-            ? parseInt(node.style.borderWidth)
+            ? node.style.borderWidth.replace("px", "")
             : "",
           borderStyle: node.style.borderStyle || "",
-          fontSize: node.style.fontSize ? parseInt(node.style.fontSize) : "",
+          fontSize: node.style.fontSize
+            ? node.style.fontSize.replace("px", "")
+            : "",
+          buttonWidth: node.style.width
+            ? node.style.width.replace("px", "")
+            : "",
         };
+
+        console.log("Current styles:", currentStyles); // Log the current styles for debugging
 
         editor.windowManager.open({
           title: "Set Button Attributes",
@@ -28,27 +61,23 @@ tinymce.PluginManager.add("customButtonPlugin", function (editor) {
                 type: "colorinput",
                 name: "backgroundColor",
                 label: "Background Color",
-                value: currentStyles.backgroundColor,
               },
               {
                 type: "colorinput",
                 name: "borderColor",
                 label: "Border Color",
-                value: currentStyles.borderColor,
               },
               {
                 type: "input",
                 name: "borderRadius",
                 label: "Border Radius (px)",
                 inputMode: "numeric",
-                value: currentStyles.borderRadius,
               },
               {
                 type: "input",
                 name: "borderWidth",
                 label: "Border Width (px)",
                 inputMode: "numeric",
-                value: currentStyles.borderWidth,
               },
               {
                 type: "listbox",
@@ -65,21 +94,18 @@ tinymce.PluginManager.add("customButtonPlugin", function (editor) {
                   { text: "Inset", value: "inset" },
                   { text: "Outset", value: "outset" },
                 ],
-                value: currentStyles.borderStyle,
               },
               {
                 type: "input",
                 name: "fontSize",
                 label: "Font Size (px)",
                 inputMode: "numeric",
-                value: currentStyles.fontSize,
               },
               {
                 type: "input",
                 name: "buttonWidth",
                 label: "Button Width (px)",
                 inputMode: "numeric",
-                value: currentStyles.buttonWidth,
               },
             ],
           },
@@ -94,8 +120,10 @@ tinymce.PluginManager.add("customButtonPlugin", function (editor) {
               type: "cancel",
             },
           ],
+          initialData: currentStyles,
           onSubmit: function (api) {
             var data = api.getData();
+            console.log("Submitted data:", data); // Log the submitted data for debugging
             if (data.backgroundColor)
               node.style.backgroundColor = data.backgroundColor;
             if (data.borderColor) node.style.borderColor = data.borderColor;
