@@ -22,6 +22,11 @@ function cleanColorInput(colorInput) {
   return colorInput;
 }
 
+function removeInlineStyles(node) {
+  node.removeAttribute("style");
+  node.removeAttribute("data-mce-style");
+}
+
 tinymce.PluginManager.add("customButtonPlugin", function (editor) {
   editor.ui.registry.addButton("editButton", {
     text: "Edit Button",
@@ -123,6 +128,8 @@ tinymce.PluginManager.add("customButtonPlugin", function (editor) {
           onSubmit: function (api) {
             var data = api.getData();
             console.log("Submitted data:", data); // Log the submitted data for debugging
+            removeInlineStyles(node);
+            console.log(node);
             if (data.backgroundColor)
               node.style.backgroundColor = data.backgroundColor;
             if (data.borderColor) node.style.borderColor = data.borderColor;

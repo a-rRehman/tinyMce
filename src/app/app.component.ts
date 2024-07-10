@@ -69,16 +69,14 @@ export class AppComponent implements AfterViewInit {
 }
 
 #customButton {
-  font-family: "Catamaran", Sans-serif;
+
   font-size: 18px;
-  font-weight: 500;
-  text-transform: uppercase;
-  font-style: normal;
   letter-spacing: 1.2px;
   color: #ffffff;
-  border: none;
-  padding: 13px 28px 12px 28px;
+  font-weight: 500;
   background-color: black;
+  text-transform: uppercase;
+  padding: 13px 28px 12px 28px;
 }
 
     </style>
@@ -90,7 +88,7 @@ export class AppComponent implements AfterViewInit {
         veniam, quis nostrud exercitation.
       </p>
       <a href="https://www.google.com">
-        <button id="customButton">More About Sweets</button>
+        <button id="customButton" style="background-color:pink;border-color:green;border-radius:10px; border-width:3px; border-style:solid; font-size:20px;width:350px;">More About Sweets</button>
       </a>
     </header>
   `;
