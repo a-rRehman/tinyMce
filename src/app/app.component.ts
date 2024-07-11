@@ -80,6 +80,7 @@ export class AppComponent implements AfterViewInit {
 }
 
     </style>
+    <section>
     <header id="header1">
       <h1 style="color:white;">A Slice of Heaven</h1>
       <p>
@@ -91,6 +92,7 @@ export class AppComponent implements AfterViewInit {
         <button id="customButton" style="background-color:pink;border-color:green;border-radius:10px; border-width:3px; border-style:solid; font-size:20px;width:350px;">More About Sweets</button>
       </a>
     </header>
+    </section>
   `;
 
   content1 = `
@@ -181,6 +183,7 @@ export class AppComponent implements AfterViewInit {
   `;
 
   content2 = `
+  <section>
    <div class="greetings-section">
   <p>GET TO KNOW US</p>
   <h1>Greetings From Lincsell</h1>
@@ -188,7 +191,7 @@ export class AppComponent implements AfterViewInit {
     ><button class="greetButton">More About Us</button></a
   >
 </div>
- 
+ </section>
 <style>
   .greetButton {
     font-size: 12px;
@@ -598,6 +601,7 @@ export class AppComponent implements AfterViewInit {
     resize: 'both',
     min_height: 760,
     plugins: [
+      'customButtonPlugin',
       'autosave',
       'charmap',
       'code',
@@ -612,7 +616,7 @@ export class AppComponent implements AfterViewInit {
       'backgroundImageChanger', // Custom plugin
     ],
     toolbar:
-      'fontselect | undo redo | styles | bold italic underline | alignleft aligncenter alignright alignjustify |' +
+      'customButtonPlugin fontselect | undo redo | styles | bold italic underline | alignleft aligncenter alignright alignjustify |' +
       'bullist numlist outdent indent | link image | print preview media fullscreen |' +
       'forecolor backcolor emoticons | code | backgroundImageChanger',
     contextmenu: 'link image table',

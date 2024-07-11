@@ -2,19 +2,24 @@ function rgbToHex(rgb) {
   if (!rgb || !rgb.startsWith("rgb")) return rgb; // Return the input if it's not an RGB value
   let parts = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
   if (!parts) return rgb; // Return the input if it doesn't match RGB pattern
+  let r = parseInt(parts[1]);
+  let g = parseInt(parts[2]);
+  let b = parseInt(parts[3]);
   return (
     "#" +
-    parts
+    ((1 << 24) + (r << 16) + (g << 8) + b)
+      .toString(16)
       .slice(1)
-      .map((n) => parseInt(n).toString(16).padStart(2, "0").toUpperCase())
-      .join("")
+      .toUpperCase()
+      .padStart(6, "0")
   );
 }
 
 function cleanColorInput(colorInput) {
-  return colorInput.startsWith("some(") && colorInput.endsWith(")")
-    ? colorInput.slice(5, -1)
-    : colorInput;
+  if (colorInput.startsWith("some(") && colorInput.endsWith(")")) {
+    return colorInput.slice(5, -1);
+  }
+  return colorInput;
 }
 
 function removeInlineStyles(node) {
@@ -28,7 +33,9 @@ tinymce.PluginManager.add("customButtonPlugin", function (editor) {
     icon: "edit",
     onAction: function () {
       const node = editor.selection.getNode();
-      if (node.nodeName === "BUTTON") {
+      console.log("Selected node:", node); // Log the selected node for debugging
+      if (node.nodeName === "BUTTON" || node.id === "customButton") {
+        // Get current styles and attributes of the button
         const currentStyles = {
           backgroundColor:
             cleanColorInput(rgbToHex(node.style.backgroundColor)) || "",
@@ -48,6 +55,7 @@ tinymce.PluginManager.add("customButtonPlugin", function (editor) {
             : "",
         };
 
+        console.log("Current styles:", currentStyles);
         editor.windowManager.open({
           title: "Set Button Attributes",
           body: {
@@ -106,13 +114,22 @@ tinymce.PluginManager.add("customButtonPlugin", function (editor) {
             ],
           },
           buttons: [
-            { text: "Apply", type: "submit", primary: true },
-            { text: "Cancel", type: "cancel" },
+            {
+              text: "Apply",
+              type: "submit",
+              primary: true,
+            },
+            {
+              text: "Cancel",
+              type: "cancel",
+            },
           ],
           initialData: currentStyles,
           onSubmit: function (api) {
             var data = api.getData();
+            console.log("Submitted data:", data); // Log the submitted data for debugging
             removeInlineStyles(node);
+            console.log(node);
             if (data.backgroundColor)
               node.style.backgroundColor = data.backgroundColor;
             if (data.borderColor) node.style.borderColor = data.borderColor;
@@ -138,7 +155,7 @@ tinymce.PluginManager.add("customButtonPlugin", function (editor) {
 
   editor.ui.registry.addContextToolbar("editButton", {
     predicate: function (node) {
-      return node.nodeName === "BUTTON";
+      return node.nodeName === "BUTTON" && node.id === "customButton";
     },
     items: "editButton",
     scope: "node",
