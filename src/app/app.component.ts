@@ -80,8 +80,8 @@ export class AppComponent implements AfterViewInit {
 }
 
     </style>
-    <section>
-    <header id="header1">
+    <section id="header1">
+   
       <h1 style="color:white;">A Slice of Heaven</h1>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -91,7 +91,7 @@ export class AppComponent implements AfterViewInit {
       <a href="https://www.google.com">
         <button id="customButton" style="background-color:pink;border-color:green;border-radius:10px; border-width:3px; border-style:solid; font-size:20px;width:350px;">More About Sweets</button>
       </a>
-    </header>
+
     </section>
   `;
 
@@ -183,14 +183,13 @@ export class AppComponent implements AfterViewInit {
   `;
 
   content2 = `
-  <section>
-   <div class="greetings-section">
+  <section class="greetings-section">
+   
   <p>GET TO KNOW US</p>
   <h1>Greetings From Lincsell</h1>
   <a href="www.google.com"
     ><button class="greetButton">More About Us</button></a
   >
-</div>
  </section>
 <style>
   .greetButton {
