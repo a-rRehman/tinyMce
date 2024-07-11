@@ -1,0 +1,19 @@
+@import url("../bootstrap/css/bootstrap.min.css");
+
+.mid_text {
+  font-size: 66px;
+  font-weight: 600;
+  color: white;
+}
+.mid_col_1 {
+  background-image: url(../images/mid_1.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 300px;
+}
+.mid_col_2 {
+  background-image: url(../images/mid_2.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 300px;
+}

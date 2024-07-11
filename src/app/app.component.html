@@ -49,3 +49,21 @@
   <button class="SaveButton2" (click)="saveContent2()">Save</button>
   <editor [init]="init2"></editor>
 </div>
+
+<!-- ---------------------------------------- -->
+
+<div
+  *ngIf="!isEditing3"
+  (mouseenter)="showEditButton3 = true"
+  (mouseleave)="showEditButton3 = false"
+>
+  <button class="EditButton2" *ngIf="showEditButton3" (click)="toggleEditor3()">
+    Edit
+  </button>
+  <div #dynamicContentContainer3></div>
+</div>
+
+<div *ngIf="isEditing3">
+  <button class="SaveButton2" (click)="saveContent3()">Save</button>
+  <editor [init]="init3"></editor>
+</div>

@@ -31,6 +31,10 @@ export class AppComponent implements AfterViewInit {
     | ElementRef
     | undefined;
 
+  @ViewChild('dynamicContentContainer3', { static: false }) container3:
+    | ElementRef
+    | undefined;
+
   content = `
     <style>
     button{
@@ -81,7 +85,7 @@ export class AppComponent implements AfterViewInit {
 
     </style>
     <section id="header1">
-      <button class="btn btn-primary">Hello World</button>
+    
       <h1 style="color:white;">A Slice of Heaven</h1>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -188,7 +192,7 @@ export class AppComponent implements AfterViewInit {
   <p>GET TO KNOW US</p>
   <h1>Greetings From Lincsell</h1>
   <a href="www.google.com"
-    ><button class="greetButton">More About Us</button></a
+    ><button class="greetButton" style="background-color:pink;border-color:green;border-radius:10px; border-width:3px; border-style:solid; font-size:20px;width:350px;">More About Us</button></a
   >
  </section>
 <style>
@@ -222,6 +226,42 @@ export class AppComponent implements AfterViewInit {
     line-height: 1.6;
   }
 </style>
+ 
+  `;
+
+  content3 = `
+ <div class="container my-5 d-flex flex-column flex-md-row" style="gap: 20px">
+  <section
+    class="mid_text col-12 col-md-6 mid_col_1 d-flex justify-content-center align-items-center"
+  >
+    Our Menu
+  </section>
+  <section
+    class="mid_text col-12 col-md-6 mid_col_2 d-flex justify-content-center align-items-center"
+  >
+    Contact
+  </section>
+</div>
+<style>
+  .mid_text {
+    font-size: 66px;
+    font-weight: 600;
+    color: white;
+  }
+  .mid_col_1 {
+    background-image: url(../assets/tinymce/images/mid_1.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 300px;
+  }
+  .mid_col_2 {
+    background-image: url(../assets/tinymce/images/mid_2.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 300px;
+  }
+</style>
+
  
   `;
 
@@ -347,14 +387,39 @@ export class AppComponent implements AfterViewInit {
          </style>
    `;
 
+  cssContent3 = `
+  <style>
+  .mid_text {
+    font-size: 66px;
+    font-weight: 600;
+    color: white;
+  }
+  .mid_col_1 {
+    background-image: url(../assets/tinymce/images/mid_1.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 300px;
+  }
+  .mid_col_2 {
+    background-image: url(../assets/tinymce/images/mid_2.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 300px;
+  }
+</style>
+
+    `;
+
   constructor(private renderer: Renderer2) {}
 
   showEditButton = false;
   showEditButton1 = false;
   showEditButton2 = false;
+  showEditButton3 = false;
   isEditing = false;
   isEditing1 = false;
   isEditing2 = false;
+  isEditing3 = false;
 
   init: EditorComponent['init'] = {
     base_url: '/tinymce',
@@ -685,10 +750,104 @@ export class AppComponent implements AfterViewInit {
     },
   };
 
+  init3: EditorComponent['init'] = {
+    base_url: '/tinymce',
+    suffix: '.min',
+    selector: 'textarea#default',
+    menubar: false,
+    resize: 'both',
+    min_height: 760,
+    plugins: [
+      'customButtonPlugin',
+      'autosave',
+      'charmap',
+      'code',
+      'codesample',
+      'fullscreen',
+      'image',
+      'link',
+      'nonbreaking',
+      'preview',
+      'save',
+      'wordcount',
+      'backgroundImageChanger', // Custom plugin
+    ],
+    toolbar:
+      'customButtonPlugin fontselect | undo redo | styles | bold italic underline | alignleft aligncenter alignright alignjustify |' +
+      'bullist numlist outdent indent | link image | print preview media fullscreen |' +
+      'forecolor backcolor emoticons | code | backgroundImageChanger',
+    contextmenu: 'link image table',
+    external_plugins: {
+      backgroundImageChanger:
+        '/assets/tinymce/plugins/mycustomplugin/backgroundImageChanger.js',
+    },
+    menu: {
+      favs: {
+        title: 'Menu',
+        items: 'code visualaid | searchreplace | emoticons',
+      },
+    },
+    content_css: '/assets/tinymce/css/mid_section.css',
+    image_title: true,
+    automatic_uploads: true,
+    file_picker_types: 'image',
+    file_picker_callback: (cb: any, value: any, meta: any) => {
+      const input = document.createElement('input');
+      input.setAttribute('type', 'file');
+      input.setAttribute('accept', 'image/*');
+
+      input.addEventListener('change', (e: Event) => {
+        const target = e.target as HTMLInputElement;
+        if (target.files && target.files.length > 0) {
+          const file = target.files[0];
+
+          const reader = new FileReader();
+          reader.addEventListener('load', () => {
+            const id = 'blobid' + new Date().getTime();
+            const blobCache = tinymce.activeEditor.editorUpload.blobCache;
+            const base64 = (reader.result as string).split(',')[1];
+            const blobInfo = blobCache.create(id, file, base64);
+            blobCache.add(blobInfo);
+
+            /* Call the callback and populate the Title field with the file name */
+            cb(blobInfo.blobUri(), { title: file.name });
+            console.log({
+              id,
+              blobUri: blobInfo.blobUri(),
+              fileName: file.name,
+            });
+          });
+          reader.readAsDataURL(file);
+        }
+      });
+
+      input.click();
+    },
+    setup: (editor) => {
+      editor.on('init', () => {
+        editor.setContent(this.content3);
+      });
+      editor.ui.registry.addContextToolbar('imagealignment', {
+        predicate: (node) => node.nodeName.toLowerCase() === 'img',
+        items: 'alignleft aligncenter alignright',
+        position: 'node',
+        scope: 'node',
+      });
+      editor.ui.registry.addContextToolbar('textselection', {
+        predicate: (node) => !editor.selection.isCollapsed(),
+        // items: 'bold italic | blockquote |alignleft aligncenter alignright ',
+        items: 'bold italic underline | bullist numlist | blockquote | code',
+        position: 'selection',
+        scope: 'node',
+      });
+    },
+  };
+
   ngAfterViewInit(): void {
     this.onChange();
     this.onChange1();
     this.onChange2();
+    this.onChange3();
   }
 
   onChange() {
@@ -701,6 +860,10 @@ export class AppComponent implements AfterViewInit {
 
   onChange2() {
     this.loadDynamicContent2();
+  }
+
+  onChange3() {
+    this.loadDynamicContent3();
   }
 
   loadDynamicContent() {
@@ -719,6 +882,12 @@ export class AppComponent implements AfterViewInit {
     this.renderer.appendChild(this.container2?.nativeElement, div);
   }
 
+  loadDynamicContent3() {
+    const div = this.renderer.createElement('div');
+    this.renderer.setProperty(div, 'innerHTML', this.content3);
+    this.renderer.appendChild(this.container3?.nativeElement, div);
+  }
+
   toggleEditor() {
     this.isEditing = !this.isEditing;
   }
@@ -729,6 +898,10 @@ export class AppComponent implements AfterViewInit {
 
   toggleEditor2() {
     this.isEditing2 = !this.isEditing2;
+  }
+
+  toggleEditor3() {
+    this.isEditing3 = !this.isEditing3;
   }
 
   saveContent() {
@@ -755,6 +928,15 @@ export class AppComponent implements AfterViewInit {
     this.toggleEditor2();
     setTimeout(() => {
       this.loadDynamicContent2();
+    }, 500);
+  }
+
+  saveContent3() {
+    const htmlContent = tinymce.activeEditor.getContent();
+    this.content3 = `${this.cssContent3}${htmlContent}`;
+    this.toggleEditor3();
+    setTimeout(() => {
+      this.loadDynamicContent3();
     }, 500);
   }
 }
