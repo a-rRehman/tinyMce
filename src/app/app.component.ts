@@ -81,7 +81,7 @@ export class AppComponent implements AfterViewInit {
 
     </style>
     <section id="header1">
-   
+      <button class="btn btn-primary">Hello World</button>
       <h1 style="color:white;">A Slice of Heaven</h1>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
